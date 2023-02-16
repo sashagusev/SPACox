@@ -286,7 +286,7 @@ SPACox.one.SNP = function(g,
   pval2 = GetProb_SPA(obj.null, G1N1, G1N0, N1set, N0, -abs(z1), lower.tail = TRUE)
   pval = pval1 + pval2
 
-  if(pval[1] > CovAdj.cutoff)
+  if( sum(is.na(pval)) != 0 | pval[1] > CovAdj.cutoff)
     return(c(MAF, missing.rate, pval, S, S.var1, z1))
 
   ## estimated variance after adjusting for covariates
