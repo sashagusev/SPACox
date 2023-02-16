@@ -312,6 +312,8 @@ SPACox.one.SNP = function(g,
 
 GetProb_SPA = function(obj.null, G2NB, G2NA, NBset, N0, q2, lower.tail){
 
+  re = c(NA,NA)
+  try({
   out = uniroot(K1_adj, c(-20,20), extendInt = "upX",
                 G2NB=G2NB, G2NA=G2NA, NBset=NBset,
                 N0=N0, q2=q2, obj.null=obj.null)
@@ -329,6 +331,7 @@ GetProb_SPA = function(obj.null, G2NB, G2NA, NBset, N0, q2, lower.tail){
   pval.norm = pnorm(q2, lower.tail = lower.tail)
 
   re = c(pval, pval.norm)
+   },silent=T)
   return(re)
 }
 
