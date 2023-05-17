@@ -246,16 +246,17 @@ SPACox.one.SNP = function(g,
       g[pos.na] = 2*MAF
   }
 
-  if(MAF > 0.5){
-    MAF = 1-MAF
-    g = 2-g
-  }
+  # --- Do not flip the minor allele
+  # if(MAF > 0.5){
+  #  MAF = 1-MAF
+  #  g = 2-g
+  # }
 
   if(G.model=="Add"){}   # do nothing if G.Model is "Add"
   if(G.model=="Dom") g = ifelse(g>=1,1,0)
   if(G.model=="Rec") g = ifelse(g<=1,0,1)
 
-  if(MAF < min.maf || missing.rate > missing.cutoff)
+  if(MAF < min.maf || (1-MAF) < min.maf || missing.rate > missing.cutoff)
     return(c(MAF, missing.rate, NA, NA, NA, NA, NA))
 
   if(!is.null(obj.null$p2g))
